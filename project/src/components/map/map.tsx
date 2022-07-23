@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map/use-map';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts';
 
-function Map () {
+function Map ({city, points}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -25,8 +25,8 @@ function Map () {
       points.forEach((point) => {
         leaflet
           .marker({
-            lat: point.lat,
-            lng: point.lng,
+            lat: point.city.location.latitude,
+            lng: point.city.location.longitude,
           }, {
             icon: defaultCustomIcon,
           })
