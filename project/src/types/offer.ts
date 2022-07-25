@@ -33,4 +33,8 @@ export type Offer = {
   type: string
 }
 
+export type CardType = {
+  city: string;
+}
+
 export type Offers = Offer[]

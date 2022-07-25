@@ -24,10 +24,10 @@ function HotelCard (props: HotelCardProps): JSX.Element {
 
   const createIsPremiumTemplate = () => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
 
-  const articleClass = cardType === 'city' ? 'cities__card' : 'near-places__card';
+  const articleClass = () => cardType === 'city' ? 'cities__card place-card' : 'near-places__card place-card';
   // console.log(price)
   return (
-    <article className="cities__card place-card" onMouseOver={mouseOverHandler}>
+    <article className={articleClass(cardType)} onMouseOver={mouseOverHandler}>
       {createIsPremiumTemplate()}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
