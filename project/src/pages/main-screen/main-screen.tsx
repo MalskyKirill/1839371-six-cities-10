@@ -1,6 +1,8 @@
 //import HotelCard from '../../components/hotel-card/hotel-card';
 import { Offer } from '../../types/offer';
-import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel'
+import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
+import Map from '../../components/map/map';
+
 
 type MainScreenProps = {
   placesCount: number;
@@ -69,7 +71,7 @@ function MainScreen ({ placesCount, offers }: MainScreenProps): JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ListOfferHotel offers={offers}/>
+              <ListOfferHotel offers={offers} />
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
               {/*
               [
@@ -86,7 +88,9 @@ function MainScreen ({ placesCount, offers }: MainScreenProps): JSX.Element {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              <Map city={offers[0].city} points={offers}/>
+            </section>
           </div>
         </div>
       </div>

@@ -28,8 +28,8 @@ export const offers: Offer[] = [
     'isFavorite': true,
     'isPremium': true,
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 8
     },
     'maxAdults': 4,
@@ -47,7 +47,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10
       },
-      'name': 'Hamburg'
+      'name': 'Amsterdam'
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Hamburg.',
     'goods': [
@@ -66,8 +66,8 @@ export const offers: Offer[] = [
     'isFavorite': true,
     'isPremium': false,
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.369553943508,
+      'longitude': 4.85309666406198,
       'zoom': 8
     },
     'maxAdults': 4,
@@ -85,7 +85,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10
       },
-      'name': 'Brussels'
+      'name': 'Amsterdam'
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
     'goods': [
@@ -104,8 +104,8 @@ export const offers: Offer[] = [
     'isFavorite': true,
     'isPremium': false,
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 8
     },
     'maxAdults': 4,
@@ -123,7 +123,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10
       },
-      'name': 'Paris'
+      'name': 'Amsterdam'
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
     'goods': [
@@ -142,8 +142,8 @@ export const offers: Offer[] = [
     'isFavorite': true,
     'isPremium': true,
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 8
     },
     'maxAdults': 4,
