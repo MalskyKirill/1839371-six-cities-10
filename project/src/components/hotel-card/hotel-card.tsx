@@ -3,22 +3,32 @@ import { Offer } from '../../types/offer';
 
 type HotelCardProps = {
   offer: Offer;
+  cardType: 'city' | 'near'
+}
+
+function getArticleClass(cardType: 'city' | 'near' ) {
+  if (cardType === "...") {
+    return "";
+  } else if (...) {
+
+  }
 }
 
 function HotelCard (props: HotelCardProps): JSX.Element {
-  const {offer} = props;
+  const {offer, cardType} = props;
   const {price, previewImage, title, type, isPremium, id} = offer;
 
   const mouseOverHandler = () => {
     console.log('Mouse detected', id);
   };
 
-  const createIsPremiumTemplate = (isPremium: boolean) => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
+  const createIsPremiumTemplate = () => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
 
+  const articleClass = cardType === 'city' ? "cities__card place-card" : (cardType)
   // console.log(price)
   return (
     <article className="cities__card place-card" onMouseOver={mouseOverHandler}>
-      {createIsPremiumTemplate(isPremium)}
+      {createIsPremiumTemplate()}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />

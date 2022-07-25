@@ -3,10 +3,11 @@ import ListComment from '../../components/list-comment/list-comment';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 
 type RoomScreenProps = {
-  reviews: Review;
+  reviews: Review[];
+  offersNearby: Offer[];
 }
-
-function RoomScreen ({reviews}: RoomScreenProps): JSX.Element {
+// <RoomScreen offersNearby={offers.slice(0,3)}
+function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Element {
   return (
     <section className="property">
       <div className="property__gallery-container container">
@@ -135,7 +136,9 @@ function RoomScreen ({reviews}: RoomScreenProps): JSX.Element {
           </section>
         </div>
       </div>
-      <section className="property__map map"></section>
+      <section className="property__map map">
+
+      </section>
     </section>
   );
 }

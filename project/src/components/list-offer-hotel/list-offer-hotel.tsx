@@ -11,7 +11,7 @@ function ListOfferHotel (props: ListOfferHotelProps) {
   const {offers} = props;
   return(
     <React.Fragment>
-      {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)}
+      {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} cardType="city" />)}
     </React.Fragment>
   );
 }

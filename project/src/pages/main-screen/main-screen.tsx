@@ -71,7 +71,7 @@ function MainScreen ({ placesCount, offers }: MainScreenProps): JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ListOfferHotel offers={offers}/>
+              <ListOfferHotel offers={offers} />
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
               {/*
               [
