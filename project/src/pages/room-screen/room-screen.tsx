@@ -14,7 +14,7 @@ type RoomScreenProps = {
 // <RoomScreen offersNearby={offers.slice(0,3)}
 function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Element {
 
-  const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods} = offer;
+  const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;
 
   const {name, isPro, avatarUrl} = host;
 
@@ -27,24 +27,7 @@ function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Eleme
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-            </div>
-            <div className="property__image-wrapper">
-              <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-            </div>
+            {images.map((img: string) => <div key={img} className="property__image-wrapper"><img className="property__image" src={img} alt="Photo studio" /></div>)}
           </div>
         </div>
         <div className="property__container container">
@@ -86,7 +69,7 @@ function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Eleme
             <div className="property__inside">
               <h2 className="property__inside-title">What&apos;s inside</h2>
               <ul className="property__inside-list">
-                {goods.map((good: string) => <li className="property__inside-item">{good}</li>)}
+                {goods.map((good: string) => <li key={good} className="property__inside-item">{good} </li>)}
               </ul>
             </div>
             <div className="property__host">
@@ -110,7 +93,7 @@ function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Eleme
               </div>
             </div>
             <section className="property__reviews reviews">
-              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
               <ul className="reviews__list">
                 <ListComment reviews={reviews}/>
               </ul>
