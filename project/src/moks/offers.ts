@@ -23,7 +23,9 @@ export const offers: Offer[] = [
     },
     'id': 1,
     'images': [
-      'img/1.png'
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
     ],
     'isFavorite': true,
     'isPremium': true,

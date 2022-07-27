@@ -9,7 +9,7 @@ export type Offer = {
     name: string
   }
   description: string
-  goods: [string]
+  goods: string[]
   host: {
     avatarUrl: string
     id: number
@@ -17,7 +17,7 @@ export type Offer = {
     name: string
   }
   id: number
-  images: [string]
+  images: string[]
   isFavorite: boolean
   isPremium: boolean
   location: {
@@ -31,6 +31,10 @@ export type Offer = {
   rating: number
   title: string
   type: string
+}
+
+export type CardType = {
+  city: string;
 }
 
 export type Offers = Offer[]

@@ -17,13 +17,13 @@ type AppScreenProps = {
   reviews: Review[];
 }
 
-function App({placesCount, offers, reviews}: AppScreenProps): JSX.Element {
+function App({placesCount, offers, reviews }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={<Layout />}>
-          <Route index element={<MainScreen placesCount={placesCount} offers={offers}/>} />
-          <Route path={AppRoute.Room} element={<RoomScreen reviews={reviews} offer={offers[0]}/>} />
+          <Route index element={<MainScreen placesCount={placesCount} offers={offers} />} />
+          <Route path={AppRoute.Room} element={<RoomScreen reviews={reviews} offersNearby={offers.slice(0,3)} offer={offers[0]}/>} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <FavoritesScreen offers={offers}/>
