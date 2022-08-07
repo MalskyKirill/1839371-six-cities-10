@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { Action, AmsterdamAction, HamburgAction } from './action';
+import { selectCity } from './action';
 import { offers } from '../moks/offers';
 
 const initialState = {
@@ -9,23 +9,10 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(AmsterdamAction, (state) => {
-      state.city = 'Amsterdam';
-    })
-    .addCase(HamburgAction, (state) => {
-      state.city = 'Hamburg';
+    .addCase(selectCity, (state, action) => {
+      state.city = action.payload;
     });
 });
 
 export {reducer};
 
-// export const updateStore = (state, action) => {
-//   switch (action.type) {
-//     case Action.Amsterdam:
-//       return newState;
-//     case Action.Hamburg:
-//       return newState;
-//     default:
-//       return state;
-//   }
-// };

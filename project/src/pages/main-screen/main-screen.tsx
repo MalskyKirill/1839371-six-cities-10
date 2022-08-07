@@ -2,6 +2,7 @@
 import { Offer } from '../../types/offer';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import Map from '../../components/map/map';
+import ListCities from '../../components/list-city/list-city';
 
 
 type MainScreenProps = {
@@ -15,7 +16,7 @@ function MainScreen ({ placesCount, offers }: MainScreenProps): JSX.Element {
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <section className="locations container">
+        {/* <section className="locations container">
           <ul className="locations__list tabs__list">
             <li className="locations__item">
               <a className="locations__item-link tabs__item" href="#">
@@ -48,7 +49,8 @@ function MainScreen ({ placesCount, offers }: MainScreenProps): JSX.Element {
               </a>
             </li>
           </ul>
-        </section>
+        </section> */}
+        <ListCities offers={offers}/>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
