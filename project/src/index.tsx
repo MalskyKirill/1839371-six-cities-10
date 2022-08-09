@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { offers } from './moks/offers';
 import { reviews } from './moks/reviews';
 import { store } from './store/index';
+import { CITIES } from './consts';
 
 // const Rating = {
 //   STARS_COUNT: 4.5,
@@ -25,6 +26,7 @@ root.render(
         placesCount={Place.PLACES_COUNT}
         offers={offers}
         reviews={reviews}
+        cities={CITIES}
       />
     </Provider>
   </React.StrictMode>,
