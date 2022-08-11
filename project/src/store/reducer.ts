@@ -3,7 +3,7 @@ import { selectCity } from './action';
 import { offers } from '../moks/offers';
 
 const initialState = {
-  city: 'Amsterdam',
+  city: 'Paris',
   offers: offers,
 };
 
