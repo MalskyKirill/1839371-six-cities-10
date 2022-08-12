@@ -1,29 +1,29 @@
-//import HotelCard from '../../components/hotel-card/hotel-card';
-import { Offer } from '../../types/offer';
+
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import Map from '../../components/map/map';
 import ListCities from '../../components/list-city/list-city';
+import {useAppSelector} from '../../hooks/index';
 
 
 type MainScreenProps = {
-  placesCount: number;
-  offers: Offer[];
   cities: string[];
 }
 
-function MainScreen ({ placesCount, offers, cities }: MainScreenProps): JSX.Element {
+function MainScreen ({ cities }: MainScreenProps): JSX.Element {
+  const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
+  const selectedCity = useAppSelector((state) => state.city);
   // console.log(offers)
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <ListCities offers={offers} cities={cities}/>
+        <ListCities offers={selectedOffers} cities={cities}/>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+            <b className="places__found">{selectedOffers.length} places to stay in {selectedCity}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -40,7 +40,7 @@ function MainScreen ({ placesCount, offers, cities }: MainScreenProps): JSX.Elem
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ListOfferHotel offers={offers} cardType='city'/>
+              <ListOfferHotel offers={selectedOffers} cardType='city'/>
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
               {/*
               [
@@ -58,7 +58,7 @@ function MainScreen ({ placesCount, offers, cities }: MainScreenProps): JSX.Elem
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={offers[0].city} points={offers}/>
+              <Map city={selectedOffers[0].city} points={selectedOffers}/>
             </section>
           </div>
         </div>
