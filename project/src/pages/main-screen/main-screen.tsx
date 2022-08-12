@@ -3,6 +3,7 @@ import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import Map from '../../components/map/map';
 import ListCities from '../../components/list-city/list-city';
 import {useAppSelector} from '../../hooks/index';
+import PlacesSorting from '../../components/places-sorting/places-sorting';
 
 
 type MainScreenProps = {
@@ -24,7 +25,7 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity}</b>
-            <form className="places__sorting" action="#" method="get">
+            {/* <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
                 Popular
@@ -38,7 +39,8 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
                 <li className="places__option" tabIndex={0}>Price: high to low</li>
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
-            </form>
+            </form> */}
+            <PlacesSorting/>
             <div className="cities__places-list places__list tabs__content">
               <ListOfferHotel offers={selectedOffers} cardType='city'/>
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
