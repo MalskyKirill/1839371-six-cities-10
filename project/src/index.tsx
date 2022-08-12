@@ -1,16 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { Provider } from 'react-redux';
 import { offers } from './moks/offers';
 import { reviews } from './moks/reviews';
-
-// const Rating = {
-//   STARS_COUNT: 4.5,
-// };
-
-const Place = {
-  PLACES_COUNT: 100,
-};
+import { store } from './store/index';
+import { CITIES } from './consts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -18,10 +13,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      placesCount={Place.PLACES_COUNT}
-      offers={offers}
-      reviews={reviews}
-    />
+    <Provider store={store}>
+      <App
+        offers={offers}
+        reviews={reviews}
+        cities={CITIES}
+      />
+    </Provider>
   </React.StrictMode>,
 );

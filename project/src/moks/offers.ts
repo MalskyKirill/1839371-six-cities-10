@@ -49,7 +49,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10
       },
-      'name': 'Amsterdam'
+      'name': 'Paris'
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Hamburg.',
     'goods': [
@@ -87,7 +87,7 @@ export const offers: Offer[] = [
         'longitude': 4.895168,
         'zoom': 10
       },
-      'name': 'Amsterdam'
+      'name': 'Cologne'
     },
     'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
     'goods': [
@@ -116,6 +116,120 @@ export const offers: Offer[] = [
     'rating': 4.8,
     'title': 'Beautiful & luxurious studio at great location',
     'type': 'house'
+  },
+  {
+    'bedrooms': 4,
+    'city': {
+      'location': {
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 10
+      },
+      'name': 'Brussels'
+    },
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'avatarUrl': 'img/1.png',
+      'id': 3,
+      'isPro': true,
+      'name': 'Angelina'
+    },
+    'id': 4,
+    'images': [
+      'img/4.png'
+    ],
+    'isFavorite': true,
+    'isPremium': true,
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 8
+    },
+    'maxAdults': 4,
+    'previewImage': 'img/apartment-01.jpg',
+    'price': 150,
+    'rating': 4.8,
+    'title': 'White castle',
+    'type': 'room'
+  },
+  {
+    'bedrooms': 4,
+    'city': {
+      'location': {
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 10
+      },
+      'name': 'Hamburg'
+    },
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'avatarUrl': 'img/1.png',
+      'id': 3,
+      'isPro': true,
+      'name': 'Angelina'
+    },
+    'id': 4,
+    'images': [
+      'img/4.png'
+    ],
+    'isFavorite': true,
+    'isPremium': true,
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 8
+    },
+    'maxAdults': 4,
+    'previewImage': 'img/apartment-01.jpg',
+    'price': 150,
+    'rating': 4.8,
+    'title': 'White castle',
+    'type': 'room'
+  },
+  {
+    'bedrooms': 4,
+    'city': {
+      'location': {
+        'latitude': 52.370216,
+        'longitude': 4.895168,
+        'zoom': 10
+      },
+      'name': 'Dusseldorf'
+    },
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'avatarUrl': 'img/1.png',
+      'id': 3,
+      'isPro': true,
+      'name': 'Angelina'
+    },
+    'id': 4,
+    'images': [
+      'img/4.png'
+    ],
+    'isFavorite': true,
+    'isPremium': true,
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 8
+    },
+    'maxAdults': 4,
+    'previewImage': 'img/apartment-01.jpg',
+    'price': 150,
+    'rating': 4.8,
+    'title': 'White castle',
+    'type': 'room'
   },
   {
     'bedrooms': 4,
