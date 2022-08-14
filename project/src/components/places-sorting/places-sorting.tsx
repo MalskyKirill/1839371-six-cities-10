@@ -2,42 +2,27 @@ import {useState} from 'react';
 import Dropdown from '../dropdown/dropdown';
 
 
-const dropdownOptions = [
-  {
-    label: 'Popular',
-    value: 'Popular',
-  },
-  {
-    label: 'Price: low to high',
-    value: 'Price: low to high',
-  },
-  {
-    label: 'Price: high to low',
-    value: 'Price: high to low',
-  },
-  {
-    label: 'Top rated first',
-    value: 'Top rated first',
-  },
-];
+function PlacesSorting ({sortType, setSortType, dropdownOptions}): JSX.Element {
 
-function PlacesSorting (): JSX.Element {
-
-  const [selected, setSelected] = useState(dropdownOptions[0]);
+  // const [selected, setSelected] = useState(dropdownOptions[0]);
+  const [open, setOpen] = useState(false);
   return(
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
-      Popular
+      <span onClick={() => setOpen(!open)} className="places__sorting-type" tabIndex={0}>
+        {sortType.value}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
+      <ul className={`places__options places__options--custom ${open ? 'places__options--opened' : ''}`}>
+
+      {/* onClick={() => setOpen(!open)}
+        className={`${open ? 'places__option--active' : ''}` */}
         <Dropdown
           dropdownOptions={dropdownOptions}
-          selected={selected}
-          onSelectedChange={setSelected}
+          sortType={sortType}
+          setSortType={setSortType}
         />
         {/* <li className="places__option places__option--active" tabIndex={0}>Popular</li>
         <li className="places__option" tabIndex={0}>Price: low to high</li>

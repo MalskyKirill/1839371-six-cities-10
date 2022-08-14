@@ -1,40 +1,34 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 
-function Dropdown ({ dropdownOptions, selected, onSelectedChange }) {
+type DropdownProps = {
+  dropdownOptions: any,
+  sortType: any,
+  setSortType: any,
+}
 
-  const [open, setOpen] = useState(false);
-  const renderedOptions = dropdownOptions.map(option => {
-    if (option.value === selected.value) {
-      return null;
-    }
+function Dropdown ({ dropdownOptions, sortType, setSortType }: DropdownProps) {
 
-    return (
-      <div
+  // const [open, setOpen] = useState(false);
+
+  const renderedOptions = dropdownOptions.map(option =>
+    (
+      <li
         key={option.value}
-        className="item"
-        onClick={() => onSelectedChange(option)}
+        className="places__option"
+        tabIndex={0}
+        onClick={() => setSortType(option)}
       >
         {option.label}
-      </div>
-    );
-  });
+      </li>
+    )
+  );
 
   return (
-    <div className="ui form">
-      <div className="field">
-        <label className="label">{selected.label}</label>
-        <div onClick={() => setOpen(!open)}
-          className={`ui selection dropdown ${open ? 'places__option places__option--active' : 'places__option'}`}
-        >
-          <i className="dropdown icon"></i>
-          <div className="text">{selected.label}</div>
-          <div onClick={() => setOpen(!open)}
-            className={`menu ${open ? 'visible transition' : ''}`}
-          >{renderedOptions}
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <React.Fragment>
+      {renderedOptions}
+    </React.Fragment>
+
   );
 }
 export default Dropdown;

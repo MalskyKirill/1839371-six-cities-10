@@ -4,6 +4,8 @@ import Map from '../../components/map/map';
 import ListCities from '../../components/list-city/list-city';
 import {useAppSelector} from '../../hooks/index';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
+import {useState} from 'react';
+import {DROPDOWN_OPNION} from '../../consts';
 
 
 type MainScreenProps = {
@@ -13,6 +15,8 @@ type MainScreenProps = {
 function MainScreen ({ cities }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
+  const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
+  console.log(setSortType)
   // console.log(offers)
   return (
     <main className="page__main page__main--index">
@@ -25,22 +29,7 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity}</b>
-            {/* <form className="places__sorting" action="#" method="get">
-              <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex={0}>
-                Popular
-                <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
-                </svg>
-              </span>
-              <ul className="places__options places__options--custom places__options--opened">
-                <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                <li className="places__option" tabIndex={0}>Price: low to high</li>
-                <li className="places__option" tabIndex={0}>Price: high to low</li>
-                <li className="places__option" tabIndex={0}>Top rated first</li>
-              </ul>
-            </form> */}
-            <PlacesSorting/>
+            <PlacesSorting sortType={sortType} setSortType={setSortType} dropdownOptions={DROPDOWN_OPNION}/>
             <div className="cities__places-list places__list tabs__content">
               <ListOfferHotel offers={selectedOffers} cardType='city'/>
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
