@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 type DropdownProps = {
   dropdownOptions: any,
   sortType: any,
   setSortType: any,
+  setOpen: any,
 }
 
-function Dropdown ({ dropdownOptions, sortType, setSortType }: DropdownProps) {
+function Dropdown ({ dropdownOptions, sortType, setSortType, setOpen }: DropdownProps) {
 
   // const [open, setOpen] = useState(false);
 
@@ -14,9 +15,9 @@ function Dropdown ({ dropdownOptions, sortType, setSortType }: DropdownProps) {
     (
       <li
         key={option.value}
-        className="places__option"
+        className={`places__option ${option.value === sortType.value ? 'places__option--active' : ''}`}
         tabIndex={0}
-        onClick={() => setSortType(option)}
+        onClick={() => {setSortType(option); setOpen(false);}}
       >
         {option.label}
       </li>
@@ -24,11 +25,9 @@ function Dropdown ({ dropdownOptions, sortType, setSortType }: DropdownProps) {
   );
 
   return (
-
     <React.Fragment>
       {renderedOptions}
     </React.Fragment>
-
   );
 }
 export default Dropdown;

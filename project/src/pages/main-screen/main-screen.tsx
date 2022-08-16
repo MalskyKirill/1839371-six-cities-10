@@ -16,8 +16,7 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
   const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
-  console.log(setSortType)
-  // console.log(offers)
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -31,7 +30,7 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity}</b>
             <PlacesSorting sortType={sortType} setSortType={setSortType} dropdownOptions={DROPDOWN_OPNION}/>
             <div className="cities__places-list places__list tabs__content">
-              <ListOfferHotel offers={selectedOffers} cardType='city'/>
+              <ListOfferHotel offers={selectedOffers} sortType={sortType} cardType='city'/>
               {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
               {/*
               [
