@@ -7,17 +7,17 @@ import {sortHotelByPriseToHigh, sortHotelByPriseToLow, sortHotelByRating} from '
 type ListOfferHotelProps = {
   offers: Offer[];
   cardType: 'city' | 'near';
-  sortType: any;
+  sortType?: any;
+  setHoveredId?: any;
 }
 
 
 function ListOfferHotel (props: ListOfferHotelProps) {
 
-  const {offers, cardType, sortType} = props;
+  const {offers, cardType, sortType, setHoveredId} = props;
 
   const handleSortTypeChange = (offers, sortType) => {
-
-    switch (sortType.value) {
+    switch (sortType?.value) {
       case SORT_HOTEL_TYPE.DEFAULT:
         return offers;
       case SORT_HOTEL_TYPE.SORT_HOTEL_BY_RATING:
@@ -26,16 +26,18 @@ function ListOfferHotel (props: ListOfferHotelProps) {
         return offers.sort(sortHotelByPriseToHigh);
       case SORT_HOTEL_TYPE.SORT_HOTEL_BY_PRISE_TO_LOW:
         return offers.sort(sortHotelByPriseToLow);
+      default:
+        return offers;
     }
-
-    return offers;
   };
 
   const newSortOffers = handleSortTypeChange(offers, sortType);
 
   return(
     <React.Fragment>
-      {newSortOffers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} cardType={cardType} />)}
+      {newSortOffers.map((offer: Offer) => (<HotelCard
+        onHover={setHoveredId}
+        key={offer.id} offer={offer} cardType={cardType} />))}
     </React.Fragment>
   );
 }

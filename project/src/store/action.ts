@@ -15,4 +15,5 @@ import { createAction } from '@reduxjs/toolkit';
 
 
 export const selectCity = createAction('app/selectCity');
-export const changeSortType = createAction('app/changeSortType');
+// export const changeSortType = createAction('app/changeSortType');
+export const loadCities = createAction('data/loadCities');
