@@ -10,7 +10,6 @@ type ListCitiesProps = {
 function ListCities (props: ListCitiesProps): JSX.Element {
   const selectedCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
-  // const getCityClass = (isSelected: boolean) => isSelected ? "tabs__item tabs__item--active" : "tabs__item";
 
   const {cities} = props;
 

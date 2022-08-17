@@ -3,23 +3,24 @@ import { Offer } from '../../types/offer';
 
 type HotelCardProps = {
   offer: Offer;
-  cardType: 'city' | 'near'
+  cardType: 'city' | 'near';
+  onHover?: any;
 }
 
-// function getArticleClass(cardType: 'city' | 'near' ) {
-//   if (cardType === "...") {
-//     return "";
-//   } else if (...) {
-
-//   }
-// }
-
 function HotelCard (props: HotelCardProps): JSX.Element {
-  const {offer, cardType} = props;
+  const {offer, cardType, onHover} = props;
   const {price, previewImage, title, type, isPremium, id} = offer;
 
   const mouseOverHandler = () => {
-    console.log('Mouse detected', id);
+     onHover(id);
+    // console.log(onHover(id));
+    // console.log('Mouse over', id);
+  };
+
+  const mouseOutHandler = () => {
+     onHover(0);
+    // console.log(onHover(null));
+    // console.log('Mouse out', id);
   };
 
   const createIsPremiumTemplate = () => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
@@ -27,7 +28,7 @@ function HotelCard (props: HotelCardProps): JSX.Element {
   const articleClass = () => cardType === 'city' ? 'cities' : 'near-places';
   // console.log(price)
   return (
-    <article className={`${articleClass()}__card place-card`} onMouseOver={mouseOverHandler}>
+    <article className={`${articleClass()}__card place-card`} onMouseEnter={mouseOverHandler} onMouseLeave={mouseOutHandler}>
       {createIsPremiumTemplate()}
       <div className={`${articleClass()}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
