@@ -6,6 +6,12 @@ import { offers } from './moks/offers';
 import { reviews } from './moks/reviews';
 import { store } from './store/index';
 import { CITIES } from './consts';
+import ErrorMessage from './components/error-message/error-message';
+import {fetchOfferAction, checkAuthAction} from './store/api-actions';
+
+store.dispatch(fetchOfferAction());
+store.dispatch(checkAuthAction());
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,10 +20,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage/>
       <App
-        offers={offers}
-        reviews={reviews}
-        cities={CITIES}
+        // offers={offers}
+        // reviews={reviews}
+        // cities={CITIES}
       />
     </Provider>
   </React.StrictMode>,

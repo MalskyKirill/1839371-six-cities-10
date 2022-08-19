@@ -12,13 +12,13 @@ function HotelCard (props: HotelCardProps): JSX.Element {
   const {price, previewImage, title, type, isPremium, id} = offer;
 
   const mouseOverHandler = () => {
-     onHover(id);
+    onHover(id);
     // console.log(onHover(id));
     // console.log('Mouse over', id);
   };
 
   const mouseOutHandler = () => {
-     onHover(0);
+    onHover(0);
     // console.log(onHover(null));
     // console.log('Mouse out', id);
   };

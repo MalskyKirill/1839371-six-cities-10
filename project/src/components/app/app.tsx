@@ -9,6 +9,8 @@ import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 
 type AppScreenProps = {
@@ -18,6 +20,18 @@ type AppScreenProps = {
 }
 
 function App({offers, reviews, cities }: AppScreenProps): JSX.Element {
+
+  const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+    authorizationStatus === AuthorizationStatus.Unknown;
+
+  const {authorizationStatus, isDataLoader} = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || isDataLoader) {
+    return (
+      <LoadingScreen/>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +39,7 @@ function App({offers, reviews, cities }: AppScreenProps): JSX.Element {
           <Route index element={<MainScreen cities={cities}/>} />
           <Route path={AppRoute.Room} element={<RoomScreen reviews={reviews} offersNearby={offers.slice(0,3)} offer={offers[0]}/>} />
           <Route path={AppRoute.Favorites} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={AuthorizationStatus}>
               <FavoritesScreen offers={offers}/>
             </PrivateRoute>
           }
