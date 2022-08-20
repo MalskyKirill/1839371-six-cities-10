@@ -28,19 +28,46 @@ function Map ({city, points, hoveredId}: MapProps) {
     iconAnchor: [20, 40],
   });
 
+  // useEffect(() => {
+  //   if (map) {
+  //     points.forEach((point) => {
+  //       leaflet
+  //         .marker({
+  //           lat: point.location.latitude,
+  //           lng: point.location.longitude,
+  //         }, {
+  //           icon: point.id === hoveredId ? activeIcon : defaultCustomIcon,
+  //         })
+  //         .addTo(map);
+  //     });
+  //   }
+  // }, [map, points, defaultCustomIcon, activeIcon]);
+
   useEffect(() => {
+    let markers: any[] = [];
+
     if (map) {
       points.forEach((point) => {
-        leaflet
+        const marker = leaflet
           .marker({
             lat: point.location.latitude,
             lng: point.location.longitude,
           }, {
             icon: point.id === hoveredId ? activeIcon : defaultCustomIcon,
-          })
-          .addTo(map);
+          });
+
+        marker.addTo(map);
+        markers.push(marker);
       });
     }
+
+    return () => {
+      if (map && markers) {
+        markers.forEach(marker => {
+          marker.remove();
+        });
+      }
+    };
   }, [map, points, defaultCustomIcon, activeIcon]);
 
   return(
