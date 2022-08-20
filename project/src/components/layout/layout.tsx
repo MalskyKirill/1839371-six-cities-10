@@ -1,7 +1,12 @@
 import {Fragment} from 'react';
 import {Outlet, Link} from 'react-router-dom';
+import {logoutAction} from '../../store/api-actions';
+import {useAppDispatch} from '../../hooks';
 
 function Layout (): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
   return (
     <Fragment>
       <header className="header">
@@ -23,9 +28,16 @@ function Layout (): JSX.Element {
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <Link
+                    className="header__nav-link"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      dispatch(logoutAction);
+                    }}
+                    to="/"
+                  >
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
