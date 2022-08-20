@@ -10,6 +10,12 @@ export enum AuthorizationStatus{
   Unknown = 'UNKNOWN'
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout'
+}
+
 export const DROPDOWN_OPNION = [
   {
     label: 'Popular',
@@ -34,8 +40,9 @@ export const SORT_HOTEL_TYPE = {
   SORT_HOTEL_BY_RATING: 'Top rated first',
   SORT_HOTEL_BY_PRISE_TO_HIGH: 'Price: low to high',
   SORT_HOTEL_BY_PRISE_TO_LOW: 'Price: high to low',
-
 };
+
+export const TIMEOUT_SHOW_ERROR = 5000;
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 

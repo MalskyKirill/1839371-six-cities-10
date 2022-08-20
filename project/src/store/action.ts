@@ -1,19 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
 
-// selectCity
-// initOffers
-
-
-// const cities = ['Amsterdam', 'Hamburg'];
-
-// export const citiesAction = {
-
-// return <div>
-//   {cities.map((cityName, index) => <div key={cityName} onClick={() => dispatch(selectCity(cityName))}>{cityName}</div>) }
-// </div>
-// }
-
-
 export const selectCity = createAction('app/selectCity');
-// export const changeSortType = createAction('app/changeSortType');
-export const loadCities = createAction('data/loadCities');
+
+export const loadOffers = createAction('data/loadOffers');
+
+export const requireAuthorization = createAction('user/requireAuthorization');
+
+export const setError = createAction<string | null>('app/setError');
+
+export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
