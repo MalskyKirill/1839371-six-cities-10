@@ -6,19 +6,26 @@ import {Offer} from '../types/offer';
 
 
 type InitalState = {
+  currentOffer: any;
   city: string,
   offers: Offer[],
   authorizationStatus: AuthorizationStatus,
   isDataLoader: boolean,
   error: string | null,
+  reviews: any,
+  user:any,
 }
 
 const initialState: InitalState = {
   city: 'Paris',
   offers: [],
+  reviews: [],
+  currentOffer: null,
+  favorites: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoader: false,
   error: null,
+  user: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {

@@ -3,16 +3,26 @@ import { Offer } from '../../types/offer';
 import ListComment from '../../components/list-comment/list-comment';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import Map from '../../components/map/map';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
+import {useAppSelector} from '../../hooks/index';
+import {useParams} from 'react-router-dom';
 
 type RoomScreenProps = {
   reviews: Review[];
   offersNearby: Offer[];
   offer: Offer;
 }
-// <RoomScreen offersNearby={offers.slice(0,3)}
+
+
 function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Element {
+
+  // const { id } = useParams();
+  // useEffect(() => {
+  //   dispatch(loadOfferAction(id));
+  // }, [id]);
+
+  // const offer = useAppSelector((state) => state.currentOffer);
 
   const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;
 
@@ -22,6 +32,13 @@ function RoomScreen ({offer, reviews, offersNearby}: RoomScreenProps): JSX.Eleme
 
   const createIsProUserStatusTemplate = () => isPro ? <div className="property__user-status"><span>Pro</span></div> : '';
 
+  /*
+  if (!offer) {
+    return <Spinner />
+  } else {
+    return ...
+  }
+  */
   return (
     <React.Fragment>
       <section className="property">

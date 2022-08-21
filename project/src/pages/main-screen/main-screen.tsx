@@ -1,4 +1,3 @@
-
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import Map from '../../components/map/map';
 import ListCities from '../../components/list-city/list-city';
@@ -15,6 +14,8 @@ type MainScreenProps = {
 function MainScreen ({ cities }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
+  // console.log('city:', selectedCity);
+  // console.log('offers:', selectedOffers);
   const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
   const [hoveredId, setHoveredId] = useState(0);
   return (
@@ -29,29 +30,17 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{selectedOffers.length} places to stay in {selectedCity}</b>
             <PlacesSorting sortType={sortType} setSortType={setSortType} dropdownOptions={DROPDOWN_OPNION}/>
-            <div className="cities__places-list places__list tabs__content">
-              <ListOfferHotel offers={selectedOffers} sortType={sortType} cardType='city' setHoveredId={setHoveredId}/>
-              {/* {offers.map((offer: Offer) => <HotelCard key={offer.id} offer={offer} />)} */}
-              {/*
-              [
-                <HotelCard key={offer.id} offer={offers[0]} />,
-                <HotelCard key={offer.id} offer={offers[2]} />,
-                <HotelCard key={offer.id} offer={offers[3]} />
-              ]
-               */}
-              {/* {HotelCard()}
-              {HotelCard()}
-              {HotelCard()}
-              {HotelCard()}
-              {HotelCard()} */}
-            </div>
+            {/* <div className="cities__places-list places__list tabs__content"> */}
+            <ListOfferHotel offers={selectedOffers} sortType={sortType} cardType='city' setHoveredId={setHoveredId}/>
+            {/* </div> */}
           </section>
-          <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map city={selectedOffers[0].city} points={selectedOffers} key={selectedOffers[0].city.name} hoveredId={hoveredId} />
+          <div className="cities__right-section" >
+            <section className="cities__map map" style={{height: '512px'}}>
+              <Map city={selectedOffers[0].city} points={selectedOffers} key={selectedCity} hoveredId={hoveredId} />
             </section>
           </div>
         </div>
+
       </div>
     </main>
   );

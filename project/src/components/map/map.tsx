@@ -28,20 +28,6 @@ function Map ({city, points, hoveredId}: MapProps) {
     iconAnchor: [20, 40],
   });
 
-  // useEffect(() => {
-  //   if (map) {
-  //     points.forEach((point) => {
-  //       leaflet
-  //         .marker({
-  //           lat: point.location.latitude,
-  //           lng: point.location.longitude,
-  //         }, {
-  //           icon: point.id === hoveredId ? activeIcon : defaultCustomIcon,
-  //         })
-  //         .addTo(map);
-  //     });
-  //   }
-  // }, [map, points, defaultCustomIcon, activeIcon]);
 
   useEffect(() => {
     let markers: any[] = [];

@@ -34,11 +34,11 @@ function ListOfferHotel (props: ListOfferHotelProps) {
   const newSortOffers = handleSortTypeChange(offers, sortType);
 
   return(
-    <React.Fragment>
+    <div className="cities__places-list places__list tabs__content">
       {newSortOffers.map((offer: Offer) => (<HotelCard
         onHover={setHoveredId}
         key={offer.id} offer={offer} cardType={cardType} />))}
-    </React.Fragment>
+    </div>
   );
 }
 
