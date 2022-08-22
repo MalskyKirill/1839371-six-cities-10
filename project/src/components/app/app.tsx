@@ -36,7 +36,7 @@ function App({cities}: AppScreenProps): JSX.Element {
       <Routes>
         <Route path={AppRoute.Main} element={<Layout />}>
           <Route index element={<MainScreen cities={cities}/>} />
-          <Route path={AppRoute.Room} element={<RoomScreen reviews={reviews} offersNearby={offers.slice(0,3)} offer={offers[0]}/>} />
+          <Route path={AppRoute.Room} element={<RoomScreen reviews={reviews} offersNearby={offers.slice(0,3)}/>} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen offers={offers}/>
