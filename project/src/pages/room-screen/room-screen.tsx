@@ -7,7 +7,7 @@ import React, {useEffect} from 'react';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import {useAppSelector} from '../../hooks/index';
 import {useParams} from 'react-router-dom';
-import {loadOfferAction} from '../../store/api-actions';
+import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction} from '../../store/api-actions';
 import {store} from '../../store';
 import LoadingScreen from '../loading-screen/loading-screen';
 
@@ -17,21 +17,32 @@ type RoomScreenProps = {
   // offer: Offer;
 }
 
-function RoomScreen ({reviews, offersNearby}: RoomScreenProps): JSX.Element {
+function RoomScreen (): JSX.Element {
 
 
   const { id } = useParams();
 
 
   const offer = useAppSelector((state) => state.currentOffer);
+  const reviews = useAppSelector((state) => state.comments);
+  const offersNearby = useAppSelector((state) => state.offersNearby);
 
   useEffect(() => {
     store.dispatch(loadOfferAction(id));
   }, [id]);
 
+  useEffect(() => {
+    store.dispatch(loadCommentsAction(id));
+  }, [id]);
+
+  useEffect(() => {
+    store.dispatch(loadOffersNearbyAction(id));
+  }, [id]);
 
 
   console.log(offer)
+  console.log(reviews)
+  console.log(offersNearby)
 
 
   const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;

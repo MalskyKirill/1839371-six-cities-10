@@ -6,6 +6,14 @@ export const selectCity = createAction('app/selectCity');
 
 export const loadOffers = createAction('data/loadOffers');
 
+export const loadOffer = createAction('data/loadOffer');
+
+export const loadOffersNearby = createAction('data/offersNearby');
+
+export const loadFavoriteOffers = createAction('data/favoriteOffers');
+
+export const loadComments = createAction('data/comments');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('app/setError');

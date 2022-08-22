@@ -15,7 +15,9 @@ export enum APIRoute {
   Offer = '/hotels/{hotelId}',
   OffersNearby = '/hotels/{hotelId}/nearby',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments',
+  FavoriteOffers = '/favorite',
 }
 
 export const DROPDOWN_OPNION = [
