@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError } from './action';
+import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError, updateUser, s } from './action';
 import { offers } from '../moks/offers';
 import { AuthorizationStatus } from '../consts';
 import {Offer} from '../types/offer';
@@ -7,8 +7,8 @@ import {Offer} from '../types/offer';
 
 type InitalState = {
   currentOffer: any;
-  city: string,
-  offers: Offer[],
+  city: any,
+  offers: any,
   authorizationStatus: AuthorizationStatus,
   isDataLoader: boolean,
   error: string | null,
@@ -41,6 +41,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(loadOffer, (state, action) => {
+      state.currentOffer = action.payload;
+    })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
@@ -49,6 +52,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(updateUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

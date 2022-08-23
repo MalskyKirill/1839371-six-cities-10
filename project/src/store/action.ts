@@ -21,3 +21,5 @@ export const setError = createAction<string | null>('app/setError');
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
 export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
+
+export const updateUser = createAction('user/updateUser');

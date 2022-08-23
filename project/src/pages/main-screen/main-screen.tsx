@@ -14,6 +14,7 @@ type MainScreenProps = {
 function MainScreen ({ cities }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
+
   // console.log('city:', selectedCity);
   // console.log('offers:', selectedOffers);
   const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
@@ -35,7 +36,7 @@ function MainScreen ({ cities }: MainScreenProps): JSX.Element {
             {/* </div> */}
           </section>
           <div className="cities__right-section" >
-            <section className="cities__map map" style={{height: '512px'}}>
+            <section className="cities__map map" >
               <Map city={selectedOffers[0].city} points={selectedOffers} key={selectedCity} hoveredId={hoveredId} />
             </section>
           </div>

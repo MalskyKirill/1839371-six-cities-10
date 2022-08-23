@@ -5,7 +5,7 @@ import CommentSubmissionForm from '../../components/comment-submission-form/comm
 import Map from '../../components/map/map';
 import React, {useEffect} from 'react';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
-import {useAppSelector} from '../../hooks/index';
+import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {useParams} from 'react-router-dom';
 import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction} from '../../store/api-actions';
 import {store} from '../../store';
@@ -20,29 +20,31 @@ type RoomScreenProps = {
 function RoomScreen (): JSX.Element {
 
 
-  const { id } = useParams();
+  const param = useParams();
+  const dispatch = useAppDispatch();
+  const id = Number(param.id);
 
 
   const offer = useAppSelector((state) => state.currentOffer);
-  const reviews = useAppSelector((state) => state.comments);
-  const offersNearby = useAppSelector((state) => state.offersNearby);
+  // const reviews = useAppSelector((state) => state.comments);
+  // const offersNearby = useAppSelector((state) => state.offersNearby);
 
   useEffect(() => {
-    store.dispatch(loadOfferAction(id));
-  }, [id]);
+    dispatch(loadOfferAction(id));
+  }, [dispatch, id]);
 
-  useEffect(() => {
-    store.dispatch(loadCommentsAction(id));
-  }, [id]);
+  // useEffect(() => {
+  //   store.dispatch(loadCommentsAction(id));
+  // }, [id]);
 
-  useEffect(() => {
-    store.dispatch(loadOffersNearbyAction(id));
-  }, [id]);
+  // useEffect(() => {
+  //   store.dispatch(loadOffersNearbyAction(id));
+  // }, [id]);
 
 
   console.log(offer)
-  console.log(reviews)
-  console.log(offersNearby)
+  // console.log(reviews)
+  // console.log(offersNearby)
 
 
   const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;

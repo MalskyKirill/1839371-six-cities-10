@@ -6,9 +6,10 @@ import { logoutAction } from '../../store/api-actions';
 function UserBlock() : JSX.Element{
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
+  const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
-  console.log(user)
+ console.log(user)
 
   if(authorizationStatus !== AuthorizationStatus.Auth || user === null){
     return (
@@ -32,10 +33,10 @@ function UserBlock() : JSX.Element{
     <ul className="header__nav-list">
       <li className="header__nav-item user">
         <a className="header__nav-link header__nav-link--profile" href="#">
-          <div className="header__avatar-wrapper user__avatar-wrapper">
+          <div className="header__avatar-wrapper user__avatar-wrapper"><img src={user} alt="" />
           </div>
-          <span className="header__user-name user__name">{user.name}</span>
-          <span className="header__favorite-count">3</span>
+          <span className="header__user-name user__name">{user}</span>
+          <span className="header__favorite-count">{favorites.length}</span>
         </a>
       </li>
       <li className="header__nav-item">
