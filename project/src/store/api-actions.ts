@@ -41,7 +41,6 @@ export const loadOfferAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffer',
   async(id, {dispatch, extra: api}) => {
-    dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offers>(`${APIRoute.Offers}/${id}`);
     dispatch(loadOffer(data));
     console.log(data)
@@ -53,11 +52,12 @@ export const loadCommentsAction = createAsyncThunk<void, undefined, {
   state: State,
   extra: AxiosInstance
 }>(
-  'data/fetchComment',
+  'data/fetchComments',
   async(id, {dispatch, extra: api}) => {
     // dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offers>(`${APIRoute.Comments}/${id}`);
     dispatch(loadComments(data));
+    console.log(data)
   },
 );
 
@@ -84,6 +84,7 @@ export const loadOffersNearbyAction = createAsyncThunk<void, undefined, {
     // dispatch(setDataLoadedStatus(true));
     const {data} = await api.get(`${APIRoute.Offers}/${id}/nearby`);
     dispatch(loadOffersNearby(data));
+    console.log(data)
   },
 );
 
@@ -112,31 +113,12 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
+    dispatch(updateUser(data.avatarUrl));
+    // dispatch(updateUser(data.email));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
-
-    dispatch(updateUser(data.avatarUrl))
-
-
-    console.log(data)
-
   },
 );
-
-// export const loginAction = createAsyncThunk<void, AuthData, { dispatch: AppDispatch, state: State, extra: AxiosInstance }>(
-//   'user/login',
-//   async ({ login: email, password }, { dispatch, extra: api }) => {
-//     try {
-//       const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
-//       saveToken(data.token);
-//       saveUserEmail(data.email);
-//       dispatch(requireAuthorization(AuthorizationStatus.Auth));
-//     } catch (error) {
-//       errorHandle(error);
-//       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-//     }
-//   },
-// );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch,
@@ -150,3 +132,11 @@ export const logoutAction = createAsyncThunk<void, undefined, {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     },
   );
+
+export const addCommentAction = createAsyncThunk<void, any, { dispatch: AppDispatch, state: State, extra: AxiosInstance }>(
+  'data/addComment',
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    const { data } = await api.post<any>(`${APIRoute.Comments}/${id}`, { comment, rating });
+    dispatch(loadComments(data));
+  },
+);

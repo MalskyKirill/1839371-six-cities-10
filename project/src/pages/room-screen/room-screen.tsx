@@ -10,11 +10,12 @@ import {useParams} from 'react-router-dom';
 import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction} from '../../store/api-actions';
 import {store} from '../../store';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { AuthorizationStatus } from '../../consts';
 
 type RoomScreenProps = {
   reviews: Review[];
   offersNearby: Offer[];
-  // offer: Offer;
+  offer: Offer;
 }
 
 function RoomScreen (): JSX.Element {
@@ -26,38 +27,34 @@ function RoomScreen (): JSX.Element {
 
 
   const offer = useAppSelector((state) => state.currentOffer);
-  // const reviews = useAppSelector((state) => state.comments);
-  // const offersNearby = useAppSelector((state) => state.offersNearby);
+  const reviews = useAppSelector((state) => state.comments);
+  const offersNearby = useAppSelector((state) => state.offersNearby);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
     dispatch(loadOfferAction(id));
+    // dispatch(loadCommentsAction(id));
+    // dispatch(loadOffersNearbyAction(id));
   }, [dispatch, id]);
-
-  // useEffect(() => {
-  //   store.dispatch(loadCommentsAction(id));
-  // }, [id]);
-
-  // useEffect(() => {
-  //   store.dispatch(loadOffersNearbyAction(id));
-  // }, [id]);
 
 
   console.log(offer)
-  // console.log(reviews)
-  // console.log(offersNearby)
+  console.log(reviews)
+  console.log(offersNearby)
+  console.log(authorizationStatus)
 
-
-  const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;
-
-  const {name, isPro, avatarUrl} = host;
-
-  const createIsPremiumTemplate = () => isPremium ? <div className="property__mark"><span>Premium</span></div> : '';
-
-  const createIsProUserStatusTemplate = () => isPro ? <div className="property__user-status"><span>Pro</span></div> : '';
 
   if (!offer) {
     return <LoadingScreen />;
   } else {
+
+    const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;
+
+    const {name, isPro, avatarUrl} = host;
+
+    const createIsPremiumTemplate = () => isPremium ? <div className="property__mark"><span>Premium</span></div> : '';
+
+    const createIsProUserStatusTemplate = () => isPro ? <div className="property__user-status"><span>Pro</span></div> : '';
     return (
       <React.Fragment>
         <section className="property">
@@ -133,7 +130,7 @@ function RoomScreen (): JSX.Element {
                 <ul className="reviews__list">
                   <ListComment reviews={reviews}/>
                 </ul>
-                <CommentSubmissionForm />
+                {authorizationStatus === AuthorizationStatus.Auth && <CommentSubmissionForm />}
               </section>
             </div>
           </div>

@@ -9,6 +9,7 @@ function UserBlock() : JSX.Element{
   const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
 
+
  console.log(user)
 
   if(authorizationStatus !== AuthorizationStatus.Auth || user === null){
