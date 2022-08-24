@@ -96,7 +96,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      dispatch(updateUser(data));
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -113,8 +114,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   async ({login: email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
-    dispatch(updateUser(data.avatarUrl));
-    // dispatch(updateUser(data.email));
+    dispatch(updateUser(data));
+    // const {data: {token, avatarUrl, email }} = await api.post<UserData>(APIRoute.Login, {email, password});
+    // saveToken(token);
+    // dispatch(updateUser({ avatarUrl, email }));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
   },
