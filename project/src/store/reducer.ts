@@ -1,24 +1,35 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError } from './action';
-import { offers } from '../moks/offers';
+import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError, updateUser, loadOffer, loadComments, loadOffersNearby} from './action';
 import { AuthorizationStatus } from '../consts';
 import {Offer} from '../types/offer';
 
 
 type InitalState = {
-  city: string,
-  offers: Offer[],
+  currentOffer: any;
+  city: any,
+  offers: any,
   authorizationStatus: AuthorizationStatus,
   isDataLoader: boolean,
   error: string | null,
+  reviews: any,
+  user:any,
+  favorites:any,
+  comments: any,
+  offersNearby: any,
 }
 
 const initialState: InitalState = {
   city: 'Paris',
   offers: [],
+  reviews: [],
+  currentOffer: null,
+  favorites: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoader: false,
   error: null,
+  user: null,
+  comments: [],
+  offersNearby: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -29,6 +40,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(loadOffer, (state, action) => {
+      state.currentOffer = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(loadOffersNearby, (state, action) => {
+      state.offersNearby = action.payload;
+    })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
@@ -37,6 +57,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(updateUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

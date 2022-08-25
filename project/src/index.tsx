@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
-import { offers } from './moks/offers';
-import { reviews } from './moks/reviews';
 import { store } from './store/index';
 import { CITIES } from './consts';
 import ErrorMessage from './components/error-message/error-message';
@@ -22,9 +20,8 @@ root.render(
     <Provider store={store}>
       <ErrorMessage/>
       <App
-        // offers={offers}
-        // reviews={reviews}
-        // cities={CITIES}
+
+        cities={CITIES}
       />
     </Provider>
   </React.StrictMode>,

@@ -12,5 +12,9 @@ export const redirect: Middleware<unknown, Reducer> =
           browserHistory.push(action.payload);
         }
 
+        if (action.type === 'app/notFound') {
+          browserHistory.push('/not-found');
+        }
+
         return next(action);
       };

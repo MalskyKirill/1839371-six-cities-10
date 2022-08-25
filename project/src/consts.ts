@@ -13,7 +13,9 @@ export enum AuthorizationStatus{
 export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments',
+  FavoriteOffers = '/favorite',
 }
 
 export const DROPDOWN_OPNION = [

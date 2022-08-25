@@ -1,14 +1,10 @@
-import {Fragment} from 'react';
 import {Outlet, Link} from 'react-router-dom';
-import {logoutAction} from '../../store/api-actions';
-import {useAppDispatch} from '../../hooks';
+import UserBlock from '../user-block/user-block';
 
 function Layout (): JSX.Element {
 
-  const dispatch = useAppDispatch();
-
   return (
-    <Fragment>
+    <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -18,36 +14,13 @@ function Layout (): JSX.Element {
               </Link>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <Link
-                    className="header__nav-link"
-                    onClick={(evt) => {
-                      evt.preventDefault();
-                      dispatch(logoutAction);
-                    }}
-                    to="/"
-                  >
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              </ul>
+              <UserBlock/>
             </nav>
           </div>
         </div>
       </header>
-      <main>
-        <Outlet />
-      </main>
-    </Fragment>
+      <Outlet />
+    </div>
   );
 }
 
