@@ -23,3 +23,5 @@ export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStat
 export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
 
 export const updateUser = createAction('user/updateUser');
+
+export const notFoundAction = createAction('app/notFound');

@@ -12,7 +12,7 @@ function CommentSubmissionForm () {
   const [comment, setComment] = useState('');
   const [isFormDisabled, setFormDisabled] = useState(false);
 
-  const isSubmitButtonDisabled: boolean = rating === 0 || comment.length < 10;
+  const isSubmitButtonDisabled: boolean = rating === 0 || (comment.length >= 50 && comment.length < 300);
 
   const resetForm = () => {
     setRating(0);

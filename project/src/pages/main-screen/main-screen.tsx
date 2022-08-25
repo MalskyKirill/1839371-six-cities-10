@@ -11,12 +11,12 @@ type MainScreenProps = {
   cities: string[];
 }
 
-function MainScreen ({ cities }: MainScreenProps): JSX.Element {
+function MainScreen ({ cities, hoveredId, setHoveredId }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
 
   const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
-  const [hoveredId, setHoveredId] = useState(0);
+  // const [hoveredId, setHoveredId] = useState(0);
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

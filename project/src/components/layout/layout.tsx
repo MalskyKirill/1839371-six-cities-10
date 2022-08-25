@@ -1,12 +1,10 @@
-import {Fragment} from 'react';
 import {Outlet, Link} from 'react-router-dom';
 import UserBlock from '../user-block/user-block';
-
 
 function Layout (): JSX.Element {
 
   return (
-    <Fragment>
+    <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -21,10 +19,8 @@ function Layout (): JSX.Element {
           </div>
         </div>
       </header>
-      <main>
-        <Outlet />
-      </main>
-    </Fragment>
+      <Outlet />
+    </div>
   );
 }
 

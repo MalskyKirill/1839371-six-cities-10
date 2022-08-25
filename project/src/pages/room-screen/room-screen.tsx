@@ -3,7 +3,7 @@ import { Offer } from '../../types/offer';
 import ListComment from '../../components/list-comment/list-comment';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import Map from '../../components/map/map';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {useParams} from 'react-router-dom';
@@ -18,7 +18,7 @@ type RoomScreenProps = {
   offer: Offer;
 }
 
-function RoomScreen (): JSX.Element {
+function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
 
 
   const param = useParams();
@@ -33,8 +33,8 @@ function RoomScreen (): JSX.Element {
 
   useEffect(() => {
     dispatch(loadOfferAction(id));
-    // dispatch(loadCommentsAction(id));
-    // dispatch(loadOffersNearbyAction(id));
+    dispatch(loadCommentsAction(id));
+    dispatch(loadOffersNearbyAction(id));
   }, [dispatch, id]);
 
 
@@ -55,6 +55,7 @@ function RoomScreen (): JSX.Element {
     const createIsPremiumTemplate = () => isPremium ? <div className="property__mark"><span>Premium</span></div> : '';
 
     const createIsProUserStatusTemplate = () => isPro ? <div className="property__user-status"><span>Pro</span></div> : '';
+
     return (
       <React.Fragment>
         <section className="property">
@@ -135,14 +136,14 @@ function RoomScreen (): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={offer.city} points={offersNearby}/>
+            <Map city={offer.city} points={offersNearby} hoveredId={hoveredId}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <ListOfferHotel offers={offersNearby} cardType='near'/>
+              <ListOfferHotel offers={offersNearby} setHoveredId={setHoveredId} cardType='near'/>
             </div>
           </section>
         </div>

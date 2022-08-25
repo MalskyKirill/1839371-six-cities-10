@@ -44,10 +44,10 @@ const reducer = createReducer(initialState, (builder) => {
       state.currentOffer = action.payload;
     })
     .addCase(loadComments, (state, action) => {
-      state.currentOffer = action.payload;
+      state.comments = action.payload;
     })
     .addCase(loadOffersNearby, (state, action) => {
-      state.currentOffer = action.payload;
+      state.offersNearby = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
