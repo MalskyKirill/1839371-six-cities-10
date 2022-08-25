@@ -25,7 +25,6 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
   const dispatch = useAppDispatch();
   const id = Number(param.id);
 
-
   const offer = useAppSelector((state) => state.currentOffer);
   const reviews = useAppSelector((state) => state.comments);
   const offersNearby = useAppSelector((state) => state.offersNearby);
@@ -36,13 +35,6 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
     dispatch(loadCommentsAction(id));
     dispatch(loadOffersNearbyAction(id));
   }, [dispatch, id]);
-
-
-  console.log(offer)
-  console.log(reviews)
-  console.log(offersNearby)
-  console.log(authorizationStatus)
-
 
   if (!offer) {
     return <LoadingScreen />;
