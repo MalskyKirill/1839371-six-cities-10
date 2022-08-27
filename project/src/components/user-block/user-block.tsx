@@ -3,14 +3,12 @@ import { AppRoute, AuthorizationStatus } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
+
 function UserBlock() : JSX.Element{
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const user = useAppSelector((state) => state.user);
   const favorites = useAppSelector((state) => state.favorites);
   const dispatch = useAppDispatch();
-
-
- console.log(user)
 
   if(authorizationStatus !== AuthorizationStatus.Auth || user === null){
     return (
@@ -37,7 +35,9 @@ function UserBlock() : JSX.Element{
           <div className="header__avatar-wrapper user__avatar-wrapper"><img src={user.avatarUrl} alt="" />
           </div>
           <span className="header__user-name user__name">{user.name}</span>
-          <span className="header__favorite-count">{favorites.length}</span>
+          <Link to={AppRoute.Favorites}>
+            <span className="header__favorite-count">{favorites.length}</span>
+          </Link>
         </a>
       </li>
       <li className="header__nav-item">

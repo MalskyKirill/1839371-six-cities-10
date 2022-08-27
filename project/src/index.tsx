@@ -20,7 +20,6 @@ root.render(
     <Provider store={store}>
       <ErrorMessage/>
       <App
-
         cities={CITIES}
       />
     </Provider>

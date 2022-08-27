@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError, updateUser, loadOffer, loadComments, loadOffersNearby} from './action';
+import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError, updateUser, loadOffer, loadComments, loadOffersNearby, toggleFavoriteOffersAction, loadFavoriteOffers} from './action';
 import { AuthorizationStatus } from '../consts';
 import {Offer} from '../types/offer';
 
@@ -49,6 +49,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffersNearby, (state, action) => {
       state.offersNearby = action.payload;
     })
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.favorites = action.payload;
+    })
+
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
@@ -60,6 +64,26 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(toggleFavoriteOffersAction, (state, action) => {
+      const id = action.payload.id;
+
+      if (state.currentOffer !== null && state.currentOffer.id === id) {
+        state.currentOffer.isFavorite = !state.currentOffer.isFavorite;
+      }
+
+      const offersIndex = state.offers.findIndex((offer) => offer.id === id);
+      state.offers.splice(offersIndex, 1, action.payload);
+
+      const favoriteOffersIndex = state.favorites.findIndex((offer) => offer.id === id);
+      if (favoriteOffersIndex > -1) {
+        state.favorites.splice(favoriteOffersIndex, 1);
+      }
+
+      const nearbyOffersIndex = state.offersNearby.findIndex((nearbyOffer) => nearbyOffer.id === id);
+      if (nearbyOffersIndex > -1) {
+        state.offersNearby.splice(nearbyOffersIndex, 1, action.payload);
+      }
     });
 });
 

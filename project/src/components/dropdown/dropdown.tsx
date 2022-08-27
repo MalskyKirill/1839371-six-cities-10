@@ -9,7 +9,6 @@ type DropdownProps = {
 
 function Dropdown ({ dropdownOptions, sortType, setSortType, setOpen }: DropdownProps) {
 
-  // const [open, setOpen] = useState(false);
 
   const renderedOptions = dropdownOptions.map(option =>
     (
