@@ -3,14 +3,13 @@ import { Offer } from '../../types/offer';
 import ListComment from '../../components/list-comment/list-comment';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import Map from '../../components/map/map';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
-import {useParams} from 'react-router-dom';
-import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction} from '../../store/api-actions';
-import {store} from '../../store';
+import {useParams, useNavigate} from 'react-router-dom';
+import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction, toggleFavoriteAction} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { AuthorizationStatus } from '../../consts';
+import { AuthorizationStatus, AppRoute } from '../../consts';
 
 type RoomScreenProps = {
   reviews: Review[];
@@ -20,7 +19,6 @@ type RoomScreenProps = {
 
 function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
 
-
   const param = useParams();
   const dispatch = useAppDispatch();
   const id = Number(param.id);
@@ -29,6 +27,7 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
   const reviews = useAppSelector((state) => state.comments);
   const offersNearby = useAppSelector((state) => state.offersNearby);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadOfferAction(id));
@@ -40,7 +39,9 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
     return <LoadingScreen />;
   } else {
 
-    const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images} = offer;
+    const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images, isFavorite} = offer;
+
+    console.log('isFavorite: ',isFavorite)
 
     const {name, isPro, avatarUrl} = host;
 
@@ -63,16 +64,26 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                <button className={`property__bookmark-button button ${isFavorite && 'property__bookmark-button--active'}`}
+                  type="button"
+                  onClick={() => {
+                    if (authorizationStatus === AuthorizationStatus.Auth) {
+                      dispatch(toggleFavoriteAction({ id, isFavorite }));
+                    } else {
+                      navigate(AppRoute.Login);
+                    }
+                  }}
+                >
+                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
+
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{width: `${rating * 20}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>

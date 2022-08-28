@@ -7,8 +7,6 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import Layout from '../layout/layout';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
-// import { Offer } from '../../types/offer';
-// import { Review } from '../../types/review';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
@@ -24,10 +22,10 @@ function App({cities}: AppScreenProps): JSX.Element {
   const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
     authorizationStatus === AuthorizationStatus.Unknown;
 
-  const {authorizationStatus, isDataLoader, offers } = useAppSelector((state) => state);
+  const {authorizationStatus, isDataLoader } = useAppSelector((state) => state);
   const [hoveredId, setHoveredId] = useState(0);
   if (isCheckedAuth(authorizationStatus) || isDataLoader) {
-    return (
+    return(
       <LoadingScreen/>
     );
   }
@@ -35,12 +33,12 @@ function App({cities}: AppScreenProps): JSX.Element {
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
-        <Route path={AppRoute.Main} element={<Layout />}>
+        <Route path={AppRoute.Main} element={<Layout/>}>
           <Route index element={<MainScreen cities={cities} hoveredId={hoveredId} setHoveredId={setHoveredId}/>} />
           <Route path={AppRoute.Room} element={<RoomScreen hoveredId={hoveredId} setHoveredId={setHoveredId}/>} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen offers={offers}/>
+              <FavoritesScreen />
             </PrivateRoute>
           }
           />

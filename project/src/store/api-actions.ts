@@ -2,12 +2,12 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state';
 import {Offers} from '../types/offer';
-import {loadOffers, loadOffer, requireAuthorization, setError, setDataLoadedStatus, redirectToRoute, loadFavoriteOffers, loadComments, loadOffersNearby, updateUser} from './action';
+import {loadOffers, loadOffer, requireAuthorization, setError, setDataLoadedStatus, redirectToRoute, loadFavoriteOffers, loadComments, loadOffersNearby, updateUser, toggleFavoriteOffersAction} from './action';
 import {saveToken, dropToken} from '../servises/token';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR, AppRoute} from '../consts';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-import { dropUserEmail, saveUserEmail } from '../servises/user-email';
+// import { dropUserEmail, saveUserEmail } from '../servises/user-email';
 import {store} from './';
 
 export const clearErrorAction = createAsyncThunk(
@@ -54,7 +54,6 @@ export const loadCommentsAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchComments',
   async(id, {dispatch, extra: api}) => {
-    // dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offers>(`${APIRoute.Comments}/${id}`);
     dispatch(loadComments(data));
     console.log(data)
@@ -115,9 +114,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(updateUser(data));
-    // const {data: {token, avatarUrl, email }} = await api.post<UserData>(APIRoute.Login, {email, password});
-    // saveToken(token);
-    // dispatch(updateUser({ avatarUrl, email }));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
   },
@@ -141,5 +137,13 @@ export const addCommentAction = createAsyncThunk<void, any, { dispatch: AppDispa
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
     const { data } = await api.post<any>(`${APIRoute.Comments}/${id}`, { comment, rating });
     dispatch(loadComments(data));
+  },
+);
+
+export const toggleFavoriteAction = createAsyncThunk<void, any, { dispatch: AppDispatch, state: State, extra: AxiosInstance }>(
+  'data/toggleFavorite',
+  async ({ id, isFavorite }, { dispatch, extra: api }) => {
+    const { data } = await api.post<any>(`${APIRoute.FavoriteOffers}/${id}/${isFavorite ? 0 : 1}`);
+    dispatch(toggleFavoriteOffersAction(data));
   },
 );
