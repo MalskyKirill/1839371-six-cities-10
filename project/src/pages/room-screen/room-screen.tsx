@@ -8,7 +8,6 @@ import ListOfferHotel from '../../components/list-offer-hotel/list-offer-hotel';
 import {useAppSelector, useAppDispatch} from '../../hooks/index';
 import {useParams, useNavigate} from 'react-router-dom';
 import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction, toggleFavoriteAction} from '../../store/api-actions';
-// import {store} from '../../store';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { AuthorizationStatus, AppRoute } from '../../consts';
 
@@ -42,7 +41,7 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
 
     const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images, isFavorite} = offer;
 
-    console.log(isFavorite)
+    console.log('isFavorite: ',isFavorite)
 
     const {name, isPro, avatarUrl} = host;
 
@@ -75,7 +74,7 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
                     }
                   }}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>

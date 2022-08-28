@@ -75,9 +75,13 @@ const reducer = createReducer(initialState, (builder) => {
       const offersIndex = state.offers.findIndex((offer) => offer.id === id);
       state.offers.splice(offersIndex, 1, action.payload);
 
-      const favoriteOffersIndex = state.favorites.findIndex((offer) => offer.id === id);
-      if (favoriteOffersIndex > -1) {
-        state.favorites.splice(favoriteOffersIndex, 1);
+      if (!action.payload.isFavorite) {
+        const favoriteOffersIndex = state.favorites.findIndex((offer) => offer.id === id);
+        if (favoriteOffersIndex > -1) {
+          state.favorites.splice(favoriteOffersIndex, 1);
+        }
+      } else {
+        state.favorites.push(action.payload);
       }
 
       const nearbyOffersIndex = state.offersNearby.findIndex((nearbyOffer) => nearbyOffer.id === id);

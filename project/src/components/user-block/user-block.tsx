@@ -31,14 +31,12 @@ function UserBlock() : JSX.Element{
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
-        <a className="header__nav-link header__nav-link--profile" href="#">
-          <div className="header__avatar-wrapper user__avatar-wrapper"><img src={user.avatarUrl} alt="" />
+        <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
+          <div className="header__avatar-wrapper user__avatar-wrapper" ><img style={{borderRadius:'50%'}}src={user.avatarUrl} alt="" />
           </div>
           <span className="header__user-name user__name">{user.name}</span>
-          <Link to={AppRoute.Favorites}>
-            <span className="header__favorite-count">{favorites.length}</span>
-          </Link>
-        </a>
+          <span className="header__favorite-count">{favorites.length}</span>
+        </Link>
       </li>
       <li className="header__nav-item">
         <Link
