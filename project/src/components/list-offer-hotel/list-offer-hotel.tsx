@@ -32,15 +32,17 @@ function ListOfferHotel (props: ListOfferHotelProps) {
   };
 
   const newSortOffers = handleSortTypeChange(offers, sortType);
+  const items = newSortOffers.map((offer: Offer) => (
+    <HotelCard
+      onHover={setHoveredId}
+      key={offer.id}
+      offer={offer}
+      cardType={cardType}
+    />));
 
   return(
     <div className="cities__places-list places__list tabs__content">
-      {newSortOffers.map((offer: Offer) => (<HotelCard
-        onHover={setHoveredId}
-        key={offer.id}
-        offer={offer}
-        cardType={cardType}
-      />))}
+      {items}
     </div>
   );
 }

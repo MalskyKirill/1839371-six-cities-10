@@ -18,7 +18,7 @@ function ListFavoriteOfferHotel ({favoriteOffers}: ListFavoriteOfferHotelProps) 
 
   return(
     <React.Fragment>
-      {citiesList.map((city) => (
+      {citiesList.map((city: any) => (
         <li className="favorites__locations-items" key={city}>
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
@@ -32,7 +32,7 @@ function ListFavoriteOfferHotel ({favoriteOffers}: ListFavoriteOfferHotelProps) 
             </div>
           </div>
           <div className="favorites__places">
-            {favoriteOffers.filter((offer: { city: { name: unknown; }; }) => offer.city.name === city).map((offer: JSX.IntrinsicAttributes & { favoriteOffers: any; isPremium: boolean; id: number; title: string; isFavorite: boolean; previewImage: string; price: number; rating: number; type: string; }) => <FavoriteHotelCard {...offer} key={`${city}-${offer.id}`} />)}
+            {favoriteOffers.filter((offer: { city: { name: any; }; }) => offer.city.name === city).map((offer: JSX.IntrinsicAttributes & { favoriteOffers: any; isPremium: boolean; id: number; title: string; isFavorite: boolean; previewImage: string; price: number; rating: number; type: string; }) => <FavoriteHotelCard {...offer} key={`${city}-${offer.id}`} />)}
           </div>
         </li>))}
     </React.Fragment>
