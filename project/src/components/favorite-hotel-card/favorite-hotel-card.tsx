@@ -2,13 +2,25 @@ import { Link } from 'react-router-dom';
 import {toggleFavoriteAction} from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 
-function FavoriteHotelCard (favoriteOffers): JSX.Element {
+type FavoriteHotelCardProps = {
+  favoriteOffers: any,
+  isPremium: boolean,
+  id: number,
+  title: string,
+  isFavorite: boolean,
+  previewImage: string,
+  price: number,
+  rating: number,
+  type: string,
+}
+
+function FavoriteHotelCard (favoriteOffers: FavoriteHotelCardProps): JSX.Element {
 
   const dispatch = useAppDispatch();
 
   const { id, title, isPremium, isFavorite, previewImage, price, rating, type } = favoriteOffers;
 
-  const createIsPremiumTemplate = (isPremium: boolean) => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';
+  const createIsPremiumTemplate = (isPrem: boolean) => isPrem ? <div className="place-card__mark"><span>Premium</span></div> : '';
 
   return (
     <article className="favorites__card place-card">

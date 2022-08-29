@@ -7,7 +7,6 @@ import {saveToken, dropToken} from '../servises/token';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR, AppRoute} from '../consts';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
-// import { dropUserEmail, saveUserEmail } from '../servises/user-email';
 import {store} from './';
 
 export const clearErrorAction = createAsyncThunk(
@@ -43,7 +42,6 @@ export const loadOfferAction = createAsyncThunk<void, undefined, {
   async(id, {dispatch, extra: api}) => {
     const {data} = await api.get<Offers>(`${APIRoute.Offers}/${id}`);
     dispatch(loadOffer(data));
-    console.log(data)
   },
 );
 
@@ -56,7 +54,6 @@ export const loadCommentsAction = createAsyncThunk<void, undefined, {
   async(id, {dispatch, extra: api}) => {
     const {data} = await api.get<Offers>(`${APIRoute.Comments}/${id}`);
     dispatch(loadComments(data));
-    console.log(data)
   },
 );
 
@@ -67,7 +64,6 @@ export const loadFavoriteOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchFavoriteOffers',
   async(_arg, {dispatch, extra: api}) => {
-    // dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offers>(APIRoute.FavoriteOffers);
     dispatch(loadFavoriteOffers(data));
   },
@@ -80,10 +76,8 @@ export const loadOffersNearbyAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffersNearby',
   async(id, {dispatch, extra: api}) => {
-    // dispatch(setDataLoadedStatus(true));
     const {data} = await api.get(`${APIRoute.Offers}/${id}/nearby`);
     dispatch(loadOffersNearby(data));
-    console.log(data)
   },
 );
 

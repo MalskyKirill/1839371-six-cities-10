@@ -16,18 +16,18 @@ function ListOfferHotel (props: ListOfferHotelProps) {
 
   const {offers, cardType, sortType, setHoveredId} = props;
 
-  const handleSortTypeChange = (offers, sortType) => {
-    switch (sortType?.value) {
+  const handleSortTypeChange = (offer: any[], sortT: { value: any; }) => {
+    switch (sortT?.value) {
       case SORT_HOTEL_TYPE.DEFAULT:
-        return offers;
+        return offer;
       case SORT_HOTEL_TYPE.SORT_HOTEL_BY_RATING:
-        return offers.sort(sortHotelByRating);
+        return offer.sort(sortHotelByRating);
       case SORT_HOTEL_TYPE.SORT_HOTEL_BY_PRISE_TO_HIGH:
-        return offers.sort(sortHotelByPriseToHigh);
+        return offer.sort(sortHotelByPriseToHigh);
       case SORT_HOTEL_TYPE.SORT_HOTEL_BY_PRISE_TO_LOW:
-        return offers.sort(sortHotelByPriseToLow);
+        return offer.sort(sortHotelByPriseToLow);
       default:
-        return offers;
+        return offer;
     }
   };
 
@@ -37,7 +37,10 @@ function ListOfferHotel (props: ListOfferHotelProps) {
     <div className="cities__places-list places__list tabs__content">
       {newSortOffers.map((offer: Offer) => (<HotelCard
         onHover={setHoveredId}
-        key={offer.id} offer={offer} cardType={cardType} />))}
+        key={offer.id}
+        offer={offer}
+        cardType={cardType}
+      />))}
     </div>
   );
 }

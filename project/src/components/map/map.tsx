@@ -30,7 +30,7 @@ function Map ({city, points, hoveredId}: MapProps) {
 
 
   useEffect(() => {
-    let markers: any[] = [];
+    const markers: any[] = [];
 
     if (map) {
       points.forEach((point) => {
@@ -49,7 +49,7 @@ function Map ({city, points, hoveredId}: MapProps) {
 
     return () => {
       if (map && markers) {
-        markers.forEach(marker => {
+        markers.forEach((marker) => {
           marker.remove();
         });
       }

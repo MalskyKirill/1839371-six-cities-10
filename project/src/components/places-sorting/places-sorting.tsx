@@ -1,8 +1,14 @@
 import {useState} from 'react';
 import Dropdown from '../dropdown/dropdown';
 
+type PlacesSortingProps = {
+  sortType: any,
+  setSortType: any,
+  dropdownOptions: any,
+}
 
-function PlacesSorting ({sortType, setSortType, dropdownOptions}): JSX.Element {
+
+function PlacesSorting ({sortType, setSortType, dropdownOptions}: PlacesSortingProps): JSX.Element {
 
   const [open, setOpen] = useState(false);
   return(

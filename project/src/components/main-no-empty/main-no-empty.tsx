@@ -3,7 +3,16 @@ import Map from '../map/map';
 import ListOfferHotel from '../list-offer-hotel/list-offer-hotel';
 import {DROPDOWN_OPNION} from '../../consts';
 
-function MainNoEmpty ({setHoveredId, hoveredId, selectedCity, sortType, setSortType, selectedOffers}): JSX.Element {
+type MainNoEmptyProps = {
+  hoveredId: number,
+  setHoveredId: any,
+  selectedCity: string,
+  sortType: any,
+  setSortType: any,
+  selectedOffers: any,
+}
+
+function MainNoEmpty ({setHoveredId, hoveredId, selectedCity, sortType, setSortType, selectedOffers}: MainNoEmptyProps): JSX.Element {
 
   return(
     <div className="cities__places-container container">

@@ -1,7 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { selectCity, loadOffers, requireAuthorization, setDataLoadedStatus, setError, updateUser, loadOffer, loadComments, loadOffersNearby, toggleFavoriteOffersAction, loadFavoriteOffers} from './action';
 import { AuthorizationStatus } from '../consts';
-import {Offer} from '../types/offer';
 
 
 type InitalState = {
@@ -72,11 +71,11 @@ const reducer = createReducer(initialState, (builder) => {
         state.currentOffer.isFavorite = !state.currentOffer.isFavorite;
       }
 
-      const offersIndex = state.offers.findIndex((offer) => offer.id === id);
+      const offersIndex = state.offers.findIndex((offer: { id: any; }) => offer.id === id);
       state.offers.splice(offersIndex, 1, action.payload);
 
       if (!action.payload.isFavorite) {
-        const favoriteOffersIndex = state.favorites.findIndex((offer) => offer.id === id);
+        const favoriteOffersIndex = state.favorites.findIndex((offer: { id: any; }) => offer.id === id);
         if (favoriteOffersIndex > -1) {
           state.favorites.splice(favoriteOffersIndex, 1);
         }
@@ -84,7 +83,7 @@ const reducer = createReducer(initialState, (builder) => {
         state.favorites.push(action.payload);
       }
 
-      const nearbyOffersIndex = state.offersNearby.findIndex((nearbyOffer) => nearbyOffer.id === id);
+      const nearbyOffersIndex = state.offersNearby.findIndex((nearbyOffer: { id: any; }) => nearbyOffer.id === id);
       if (nearbyOffersIndex > -1) {
         state.offersNearby.splice(nearbyOffersIndex, 1, action.payload);
       }

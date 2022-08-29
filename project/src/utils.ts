@@ -1,4 +1,4 @@
-export const sortHotelByRating = (hotelA, hotelB) => {
+export const sortHotelByRating = (hotelA: { rating: number; }, hotelB: { rating: number; }) => {
   if (hotelA.rating > hotelB.rating) {
     return -1;
   }
@@ -10,7 +10,7 @@ export const sortHotelByRating = (hotelA, hotelB) => {
   return 0;
 };
 
-export const sortHotelByPriseToHigh = (hotelA, hotelB) => {
+export const sortHotelByPriseToHigh = (hotelA: { price: number; }, hotelB: { price: number; }) => {
   if (hotelA.price < hotelB.price) {
     return -1;
   }
@@ -22,7 +22,7 @@ export const sortHotelByPriseToHigh = (hotelA, hotelB) => {
   return 0;
 };
 
-export const sortHotelByPriseToLow = (hotelA, hotelB) => {
+export const sortHotelByPriseToLow = (hotelA: { price: number; }, hotelB: { price: number; }) => {
   if (hotelA.price < hotelB.price) {
     return 1;
   }
