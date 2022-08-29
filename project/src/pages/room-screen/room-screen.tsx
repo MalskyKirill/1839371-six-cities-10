@@ -1,5 +1,3 @@
-import { Review } from '../../types/review';
-import { Offer } from '../../types/offer';
 import ListComment from '../../components/list-comment/list-comment';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import Map from '../../components/map/map';
@@ -12,12 +10,11 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { AuthorizationStatus, AppRoute } from '../../consts';
 
 type RoomScreenProps = {
-  reviews: Review[];
-  offersNearby: Offer[];
-  offer: Offer;
+  hoveredId: number,
+  setHoveredId: any,
 }
 
-function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
+function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
 
   const param = useParams();
   const dispatch = useAppDispatch();
@@ -40,8 +37,6 @@ function RoomScreen ({hoveredId, setHoveredId}): JSX.Element {
   } else {
 
     const {title, isPremium, rating, type, bedrooms, maxAdults, price, host, description, goods, images, isFavorite} = offer;
-
-    console.log('isFavorite: ',isFavorite)
 
     const {name, isPro, avatarUrl} = host;
 

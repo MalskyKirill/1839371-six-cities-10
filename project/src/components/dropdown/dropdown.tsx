@@ -1,5 +1,3 @@
-import React from 'react';
-
 type DropdownProps = {
   dropdownOptions: any,
   sortType: any,
@@ -10,7 +8,7 @@ type DropdownProps = {
 function Dropdown ({ dropdownOptions, sortType, setSortType, setOpen }: DropdownProps) {
 
 
-  const renderedOptions = dropdownOptions.map(option =>
+  const renderedOptions = dropdownOptions.map((option: { value: React.Key | null | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) =>
     (
       <li
         key={option.value}
@@ -24,9 +22,9 @@ function Dropdown ({ dropdownOptions, sortType, setSortType, setOpen }: Dropdown
   );
 
   return (
-    <React.Fragment>
+    <div>
       {renderedOptions}
-    </React.Fragment>
+    </div>
   );
 }
 export default Dropdown;

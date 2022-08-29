@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
-import City from '../../city/city';
+import City from '../city/city';
 import {selectCity} from '../../store/action';
 
 
@@ -16,7 +16,7 @@ function ListCities (props: ListCitiesProps): JSX.Element {
   return(
     <section className="locations container">
       <ul className="locations__list tabs__list" >
-        {cities.map((city: string) => (
+        {cities.map((city) => (
           <City
             selected={city === selectedCity}
             key={city}
