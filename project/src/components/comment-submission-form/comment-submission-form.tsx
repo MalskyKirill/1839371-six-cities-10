@@ -10,6 +10,7 @@ function CommentSubmissionForm () {
   const currentId = Number(param.id);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [isFormDisabled, setFormDisabled] = useState(false);
 
   const MIN_COMMENT_LENGTH = 50;
@@ -26,18 +27,30 @@ function CommentSubmissionForm () {
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { value } = evt.target;
     setRating(Number(value));
+    setError(null);
   };
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = evt.target;
     setComment(value);
+    setError(null);
   };
 
   const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     setFormDisabled(true);
-    await dispatch(addCommentAction({ id: currentId, comment, rating }));
-    resetForm();
+
+    try {
+      const result: any = await dispatch(addCommentAction({ id: currentId, comment, rating }));
+
+      if (result?.error === undefined) {
+        resetForm();
+      } else {
+        setError(result.error.message);
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
 
@@ -90,6 +103,7 @@ function CommentSubmissionForm () {
         disabled={isFormDisabled}
       >
       </textarea>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your

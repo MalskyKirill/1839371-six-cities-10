@@ -1,9 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {toggleFavoriteAction, loadFavoriteOffersAction} from '../../store/api-actions';
+import {toggleFavoriteAction} from '../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../consts';
-import {useEffect} from 'react';
 import {upperCaseFirstLater} from '../../utils';
 
 type HotelCardProps = {
@@ -18,19 +17,19 @@ function HotelCard (props: HotelCardProps): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(loadFavoriteOffersAction());
-  }, [dispatch]);
-
   const {offer, cardType, onHover} = props;
   const {price, previewImage, title, type, isPremium, id, isFavorite, rating} = offer;
 
   const mouseOverHandler = () => {
-    onHover(id);
+    if (onHover) {
+      onHover(id);
+    }
   };
 
   const mouseOutHandler = () => {
-    onHover(0);
+    if (onHover) {
+      onHover(0);
+    }
   };
 
   const createIsPremiumTemplate = () => isPremium ? <div className="place-card__mark"><span>Premium</span></div> : '';

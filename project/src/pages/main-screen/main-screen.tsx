@@ -1,7 +1,9 @@
+
+import {loadFavoriteOffersAction} from '../../store/api-actions';
 import ListCities from '../../components/list-city/list-city';
-import {useAppSelector} from '../../hooks/index';
-import {useState} from 'react';
-import {DROPDOWN_OPNION} from '../../consts';
+import {useAppSelector, useAppDispatch} from '../../hooks/index';
+import {useState, useEffect} from 'react';
+import {DROPDOWN_OPNION, AuthorizationStatus} from '../../consts';
 import MainNoEmpty from '../../components/main-no-empty/main-no-empty';
 import MainEmpty from '../../components/main-empty/main-empty';
 
@@ -12,9 +14,20 @@ type MainScreenProps = {
   setHoveredId: any,
 }
 
+const isLoggedIn = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Auth;
+
 function MainScreen ({ cities, hoveredId, setHoveredId }: MainScreenProps): JSX.Element {
   const selectedOffers = useAppSelector((state) => state.offers.filter((offer: { city: { name: string; }; }) => state.city === offer.city.name));
   const selectedCity = useAppSelector((state) => state.city);
+  const {authorizationStatus } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isLoggedIn(authorizationStatus)) {
+      dispatch(loadFavoriteOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   const [sortType, setSortType] = useState(DROPDOWN_OPNION[0]);
 

@@ -7,14 +7,14 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import Layout from '../layout/layout';
 import { AppRoute, AuthorizationStatus } from '../../consts';
 import PrivateRoute from '../private-route/private-route';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import Footer from '../footer/footer';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
-import {loadFavoriteOffersAction} from '../../store/api-actions';
+
 
 type AppScreenProps = {
   cities: string[];
@@ -29,12 +29,6 @@ function App({cities}: AppScreenProps): JSX.Element {
   const [hoveredId, setHoveredId] = useState(0);
 
   const favoriteOffers = useAppSelector((state) => state.favorites);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadFavoriteOffersAction());
-  }, [dispatch]);
-
 
   if (isCheckedAuth(authorizationStatus) || isDataLoader) {
     return(

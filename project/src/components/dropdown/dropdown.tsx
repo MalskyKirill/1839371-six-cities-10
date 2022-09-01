@@ -6,8 +6,6 @@ type DropdownProps = {
 }
 
 function Dropdown ({ dropdownOptions, sortType, setSortType, setOpen }: DropdownProps) {
-
-
   const renderedOptions = dropdownOptions.map((option: { value: React.Key | null | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) =>
     (
       <li
