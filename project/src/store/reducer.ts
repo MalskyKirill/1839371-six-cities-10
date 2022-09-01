@@ -54,6 +54,9 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+      if (action.payload === AuthorizationStatus.NoAuth) {
+        state.offers = state.offers.map((offer: any) => ({ ...offer, isFavorite: false }));
+      }
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoader = action.payload;

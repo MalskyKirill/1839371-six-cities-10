@@ -8,13 +8,10 @@ import {useParams, useNavigate} from 'react-router-dom';
 import {loadOfferAction, loadOffersNearbyAction, loadCommentsAction, toggleFavoriteAction} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { AuthorizationStatus, AppRoute } from '../../consts';
+import {upperCaseFirstLater} from '../../utils';
 
-type RoomScreenProps = {
-  hoveredId: number,
-  setHoveredId: any,
-}
 
-function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
+function RoomScreen (): JSX.Element {
 
   const param = useParams();
   const dispatch = useAppDispatch();
@@ -40,6 +37,8 @@ function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
 
     const {name, isPro, avatarUrl} = host;
 
+    const MAX_IMAGES = 6;
+
     const createIsPremiumTemplate = () => isPremium ? <div className="property__mark"><span>Premium</span></div> : '';
 
     const createIsProUserStatusTemplate = () => isPro ? <div className="property__user-status"><span>Pro</span></div> : '';
@@ -49,7 +48,7 @@ function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((img: string) => <div key={img} className="property__image-wrapper"><img className="property__image" src={img} alt="Photo studio" /></div>)}
+              {images.slice(0, MAX_IMAGES).map((img: string) => <div key={img} className="property__image-wrapper"><img className="property__image" src={img} alt="Photo studio" /></div>)}
             </div>
           </div>
           <div className="property__container container">
@@ -78,14 +77,14 @@ function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${rating * 20}%`}}></span>
+                  <span style={{width: `${Math.round(rating) * 20}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {upperCaseFirstLater(type)}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms} Bedrooms
@@ -134,14 +133,14 @@ function RoomScreen ({hoveredId, setHoveredId}: RoomScreenProps): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={offer.city} points={offersNearby} hoveredId={hoveredId}/>
+            <Map city={offer.city} points={offersNearby} pointCurrent={offer}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <ListOfferHotel offers={offersNearby} setHoveredId={setHoveredId} cardType='near'/>
+              <ListOfferHotel offers={offersNearby} cardType='near'/>
             </div>
           </section>
         </div>

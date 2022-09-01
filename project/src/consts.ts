@@ -44,12 +44,14 @@ export const SORT_HOTEL_TYPE = {
   SORT_HOTEL_BY_PRISE_TO_LOW: 'Price: high to low',
 };
 
+export const REGEXP_VALIDATION = '(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]+';
+
+export const MESSAGE_VALIDATION = 'Пароль должен содержать хотя бы 1 букву и 1 цифру';
+
 export const TIMEOUT_SHOW_ERROR = 5000;
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = 'img/pin.svg ';
 
 export const ACTIVE_ICON_URL = 'img/pin-active.svg';
-
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';

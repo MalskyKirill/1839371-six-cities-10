@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import {toggleFavoriteAction} from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
+import {upperCaseFirstLater} from '../../utils';
 
 type FavoriteHotelCardProps = {
   favoriteOffers: any,
@@ -50,14 +51,14 @@ function FavoriteHotelCard (favoriteOffers: FavoriteHotelCardProps): JSX.Element
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}></span>
+            <span style={{width: `${Math.round(rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{upperCaseFirstLater(type)}</p>
       </div>
     </article>
 

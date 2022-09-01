@@ -24,7 +24,7 @@ function UserBlock() : JSX.Element{
     );
   }
 
-  const logoutClickHandler = () => {
+  const handleClickHandler = () => {
     dispatch(logoutAction());
   };
 
@@ -34,14 +34,14 @@ function UserBlock() : JSX.Element{
         <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
           <div className="header__avatar-wrapper user__avatar-wrapper" ><img style={{borderRadius:'50%'}}src={user.avatarUrl} alt="" />
           </div>
-          <span className="header__user-name user__name">{user.name}</span>
+          <span className="header__user-name user__name">{user.email}</span>
           <span className="header__favorite-count">{favorites.length}</span>
         </Link>
       </li>
       <li className="header__nav-item">
         <Link
           className="header__nav-link"
-          onClick={logoutClickHandler}
+          onClick={handleClickHandler}
           to={AppRoute.Main}
         >
           <span className="header__signout">Sign out</span>

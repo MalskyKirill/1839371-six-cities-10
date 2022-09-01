@@ -1,31 +1,32 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map/use-map';
-import {URL_MARKER_DEFAULT, ACTIVE_ICON_URL} from '../../consts'; // URL_MARKER_CURRENT
+import {URL_MARKER_DEFAULT, ACTIVE_ICON_URL} from '../../consts';
 import { Offer } from '../../types/offer';
 
 
 type MapProps = {
   city: Offer['city'],
-  points: Offer[]
-  hoveredId?: any;
+  points: Offer[],
+  hoveredId?: any,
+  pointCurrent?: any,
 }
 
-function Map ({city, points, hoveredId}: MapProps) {
+function Map ({city, points, hoveredId, pointCurrent}: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null!);
   const map = useMap(mapRef, city);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [14, 39],
   });
 
   const activeIcon = leaflet.icon({
     iconUrl: ACTIVE_ICON_URL,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconSize: [27, 39],
+    iconAnchor: [14, 39],
   });
 
 
@@ -41,6 +42,16 @@ function Map ({city, points, hoveredId}: MapProps) {
           }, {
             icon: point.id === hoveredId ? activeIcon : defaultCustomIcon,
           });
+
+        if (pointCurrent) {
+          const currentMarker = leaflet.marker({
+            lat: pointCurrent.location.latitude,
+            lng: pointCurrent.location.longitude,
+          }, {
+            icon: pointCurrent.id === hoveredId ? defaultCustomIcon : activeIcon,
+          });
+          currentMarker.addTo(map);
+        }
 
         marker.addTo(map);
         markers.push(marker);

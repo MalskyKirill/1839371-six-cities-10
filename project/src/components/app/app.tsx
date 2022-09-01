@@ -12,6 +12,9 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import {useState} from 'react';
+import Footer from '../footer/footer';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
+
 
 type AppScreenProps = {
   cities: string[];
@@ -24,6 +27,9 @@ function App({cities}: AppScreenProps): JSX.Element {
 
   const {authorizationStatus, isDataLoader } = useAppSelector((state) => state);
   const [hoveredId, setHoveredId] = useState(0);
+
+  const favoriteOffers = useAppSelector((state) => state.favorites);
+
   if (isCheckedAuth(authorizationStatus) || isDataLoader) {
     return(
       <LoadingScreen/>
@@ -35,10 +41,13 @@ function App({cities}: AppScreenProps): JSX.Element {
       <Routes>
         <Route path={AppRoute.Main} element={<Layout/>}>
           <Route index element={<MainScreen cities={cities} hoveredId={hoveredId} setHoveredId={setHoveredId}/>} />
-          <Route path={AppRoute.Room} element={<RoomScreen hoveredId={hoveredId} setHoveredId={setHoveredId}/>} />
+          <Route path={AppRoute.Room} element={<RoomScreen />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen />
+              <>
+                {favoriteOffers.length === 0 ? <FavoritesEmpty /> : <FavoritesScreen />}
+                <Footer />
+              </>
             </PrivateRoute>
           }
           />
