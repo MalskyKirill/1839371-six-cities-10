@@ -126,6 +126,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     },
   );
 
+
 export const addCommentAction = createAsyncThunk<void, any, { dispatch: AppDispatch, state: State, extra: AxiosInstance }>(
   'data/addComment',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {

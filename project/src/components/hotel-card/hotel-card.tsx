@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {toggleFavoriteAction} from '../../store/api-actions';
+import {toggleFavoriteAction, loadFavoriteOffersAction} from '../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../consts';
+import {useEffect} from 'react';
+import {upperCaseFirstLater} from '../../utils';
 
 type HotelCardProps = {
   offer: Offer;
@@ -15,6 +17,10 @@ function HotelCard (props: HotelCardProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadFavoriteOffersAction());
+  }, [dispatch]);
 
   const {offer, cardType, onHover} = props;
   const {price, previewImage, title, type, isPremium, id, isFavorite, rating} = offer;
@@ -64,14 +70,14 @@ function HotelCard (props: HotelCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}></span>
+            <span style={{width: `${Math.round(rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
           <a href="#">{title}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{upperCaseFirstLater(type)}</p>
       </div>
     </article>
   );

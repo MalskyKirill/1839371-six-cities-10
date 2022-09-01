@@ -1,18 +1,10 @@
 import ListFavoriteOfferHotel from '../../components/list-favorite-offer-hotel/list-favorite-offer-hotel';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import {useEffect} from 'react';
-import {loadFavoriteOffersAction} from '../../store/api-actions';
+import { useAppSelector } from '../../hooks';
 
 
 function FavoritesScreen (): JSX.Element {
 
   const favoriteOffers = useAppSelector((state) => state.favorites);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(loadFavoriteOffersAction());
-  }, [dispatch]);
-
 
   return (
     <main className="page__main page__main--favorites">
